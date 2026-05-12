@@ -11,23 +11,17 @@
 
   :root {
     --cream: #f5f0e8;
-    --warm-white: #faf8f4;
     --deep: #1a1208;
     --brown: #3d2b1a;
     --gold: #c9a84c;
     --gold-light: #e8d5a3;
-    --rose: #c4847a;
     --sage: #7a9e8a;
-    --text: #2c1f12;
-    --text-light: #6b5742;
-    --shadow: rgba(26,18,8,0.12);
   }
 
   html, body {
     height: 100dvh;
     background: var(--deep);
     font-family: 'Jost', sans-serif;
-    color: var(--text);
     overflow: hidden;
   }
 
@@ -37,14 +31,13 @@
     height: 100dvh;
     max-width: 680px;
     margin: 0 auto;
-    position: relative;
   }
 
-  /* ── HERO HEADER ── */
+  /* ── HEADER ── */
   #header {
     position: relative;
     flex-shrink: 0;
-    height: 220px;
+    height: 195px;
     overflow: hidden;
   }
 
@@ -54,57 +47,132 @@
     object-fit: cover;
     object-position: center 30%;
     display: block;
-    filter: brightness(0.75) saturate(0.9);
+    filter: brightness(0.7) saturate(0.9);
   }
 
   #header-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(26,18,8,0.2) 0%,
-      rgba(26,18,8,0.1) 40%,
-      rgba(26,18,8,0.75) 80%,
-      rgba(26,18,8,1) 100%
-    );
+    background: linear-gradient(to bottom, rgba(26,18,8,0.2) 0%, rgba(26,18,8,0.1) 40%, rgba(26,18,8,0.8) 80%, rgba(26,18,8,1) 100%);
   }
 
   #header-text {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 0 24px 20px;
+    bottom: 0; left: 0; right: 0;
+    padding: 0 22px 16px;
   }
 
   #header-text h1 {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 300;
-    font-size: 2.2rem;
+    font-size: 1.9rem;
     color: var(--cream);
     letter-spacing: 0.02em;
-    line-height: 1.1;
   }
 
   #header-text p {
-    font-size: 0.72rem;
-    font-weight: 300;
+    font-size: 0.66rem;
     color: var(--gold-light);
-    letter-spacing: 0.18em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    margin-top: 4px;
-    opacity: 0.85;
+    margin-top: 3px;
+    opacity: 0.8;
   }
 
-  /* ── MESSAGES AREA ── */
+  /* ── MUSIC PLAYER ── */
+  #music-bar {
+    flex-shrink: 0;
+    background: #0f0b05;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+    padding: 9px 16px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+  }
+
+  #play-btn {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.3);
+    background: transparent;
+    color: var(--gold);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+
+  #play-btn:hover { background: rgba(201,168,76,0.1); }
+  #play-btn svg { width: 13px; height: 13px; }
+
+  #track-info {
+    flex: 1;
+    min-width: 0;
+    cursor: pointer;
+  }
+
+  #track-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--gold-light);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #track-sub {
+    font-size: 0.56rem;
+    color: rgba(201,168,76,0.38);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 1px;
+  }
+
+  #progress-bar {
+    width: 100px;
+    height: 2px;
+    background: rgba(201,168,76,0.1);
+    border-radius: 2px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  #progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--gold), rgba(201,168,76,0.4));
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.5s linear;
+  }
+
+  #next-btn {
+    width: 26px; height: 26px;
+    border: none;
+    background: transparent;
+    color: rgba(201,168,76,0.45);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: color 0.2s;
+  }
+
+  #next-btn:hover { color: var(--gold); }
+  #next-btn svg { width: 12px; height: 12px; }
+
+  /* ── MESSAGES ── */
   #messages {
     flex: 1;
     overflow-y: auto;
-    padding: 20px 20px 8px;
+    padding: 16px 20px 8px;
     background: var(--deep);
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
     scroll-behavior: smooth;
   }
 
@@ -112,7 +180,6 @@
   #messages::-webkit-scrollbar-track { background: transparent; }
   #messages::-webkit-scrollbar-thumb { background: var(--brown); border-radius: 2px; }
 
-  /* ── MESSAGES ── */
   .msg-row {
     display: flex;
     flex-direction: column;
@@ -129,21 +196,20 @@
   .msg-row.marius { align-self: flex-start; align-items: flex-start; }
 
   .msg-label {
-    font-size: 0.62rem;
+    font-size: 0.59rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    font-weight: 400;
-    margin-bottom: 5px;
-    opacity: 0.5;
+    margin-bottom: 4px;
+    opacity: 0.42;
   }
 
   .msg-row.sandy .msg-label { color: var(--gold); }
   .msg-row.marius .msg-label { color: var(--sage); }
 
   .bubble {
-    padding: 13px 17px;
+    padding: 12px 16px;
     border-radius: 18px;
-    font-size: 0.93rem;
+    font-size: 0.91rem;
     line-height: 1.6;
     max-width: 100%;
   }
@@ -152,17 +218,16 @@
     background: linear-gradient(135deg, #2a1f10, #3d2b1a);
     color: var(--gold-light);
     border-radius: 18px 18px 4px 18px;
-    border: 1px solid rgba(201,168,76,0.2);
+    border: 1px solid rgba(201,168,76,0.18);
   }
 
   .msg-row.marius .bubble {
     background: linear-gradient(135deg, #1e2a24, #243028);
     color: #d4e8db;
     border-radius: 18px 18px 18px 4px;
-    border: 1px solid rgba(122,158,138,0.2);
+    border: 1px solid rgba(122,158,138,0.18);
   }
 
-  /* typing indicator */
   .typing-indicator {
     display: flex;
     gap: 5px;
@@ -171,8 +236,7 @@
   }
 
   .typing-indicator span {
-    width: 6px;
-    height: 6px;
+    width: 6px; height: 6px;
     background: var(--sage);
     border-radius: 50%;
     animation: pulse 1.4s ease-in-out infinite;
@@ -187,19 +251,18 @@
     40% { transform: scale(1.3); opacity: 1; }
   }
 
-  /* ── DIVIDER ── */
   #divider {
     height: 1px;
-    background: linear-gradient(to right, transparent, rgba(201,168,76,0.2), transparent);
+    background: linear-gradient(to right, transparent, rgba(201,168,76,0.12), transparent);
     margin: 0 20px;
     flex-shrink: 0;
   }
 
-  /* ── INPUT AREA ── */
+  /* ── INPUT ── */
   #input-area {
     flex-shrink: 0;
     background: var(--deep);
-    padding: 14px 16px max(20px, env(safe-area-inset-bottom));
+    padding: 12px 16px max(18px, env(safe-area-inset-bottom));
   }
 
   #input-row {
@@ -207,15 +270,13 @@
     align-items: flex-end;
     gap: 10px;
     background: #120d06;
-    border: 1px solid rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.14);
     border-radius: 24px;
     padding: 10px 10px 10px 18px;
     transition: border-color 0.2s;
   }
 
-  #input-row:focus-within {
-    border-color: rgba(201,168,76,0.4);
-  }
+  #input-row:focus-within { border-color: rgba(201,168,76,0.38); }
 
   #msg-input {
     flex: 1;
@@ -234,14 +295,10 @@
     caret-color: var(--gold);
   }
 
-  #msg-input::placeholder {
-    color: rgba(245,240,232,0.2);
-    font-style: italic;
-  }
+  #msg-input::placeholder { color: rgba(245,240,232,0.18); font-style: italic; }
 
   #send-btn {
-    width: 38px;
-    height: 38px;
+    width: 38px; height: 38px;
     border-radius: 50%;
     border: none;
     background: linear-gradient(135deg, var(--gold), #a8842a);
@@ -257,21 +314,19 @@
   #send-btn:hover { transform: scale(1.08); }
   #send-btn:active { transform: scale(0.95); }
   #send-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-
   #send-btn svg { width: 16px; height: 16px; }
 
   #footer-note {
     text-align: center;
-    font-size: 0.62rem;
-    color: rgba(245,240,232,0.2);
+    font-size: 0.59rem;
+    color: rgba(245,240,232,0.16);
     letter-spacing: 0.1em;
-    margin-top: 10px;
+    margin-top: 8px;
   }
 
-  /* ── WELCOME ── */
   #welcome {
     text-align: center;
-    padding: 32px 16px;
+    padding: 28px 16px;
     flex-direction: column;
     align-items: center;
     display: flex;
@@ -280,18 +335,18 @@
 
   #welcome .ornament {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
+    font-size: 1.7rem;
     color: var(--gold);
-    opacity: 0.4;
+    opacity: 0.38;
   }
 
   #welcome p {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.05rem;
+    font-size: 1.02rem;
     font-style: italic;
-    color: rgba(245,240,232,0.35);
+    color: rgba(245,240,232,0.32);
     line-height: 1.7;
-    max-width: 320px;
+    max-width: 300px;
   }
 </style>
 </head>
@@ -306,6 +361,22 @@
     </div>
   </div>
 
+  <div id="music-bar">
+    <button id="play-btn" title="Play / Pause">
+      <svg id="play-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+    </button>
+    <div id="track-info">
+      <div id="track-name">—</div>
+      <div id="track-sub">tap title to skip • tap bar to seek</div>
+    </div>
+    <div id="progress-bar" onclick="seekAudio(event)">
+      <div id="progress-fill"></div>
+    </div>
+    <button id="next-btn" title="Next" onclick="nextTrack()">
+      <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,5 15,12 5,19"/><rect x="16" y="5" width="2.5" height="14"/></svg>
+    </button>
+  </div>
+
   <div id="messages">
     <div id="welcome">
       <div class="ornament">✦</div>
@@ -318,7 +389,7 @@
   <div id="input-area">
     <div id="input-row">
       <textarea id="msg-input" placeholder="Say something to Marius…" rows="1"></textarea>
-      <button id="send-btn" title="Send">
+      <button id="send-btn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <line x1="22" y1="2" x2="11" y2="13"></line>
           <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
@@ -329,7 +400,39 @@
   </div>
 </div>
 
+<audio id="audio-el" preload="none"></audio>
+
 <script>
+const TRACKS = [
+  { name: "Faaaaaded (Remixed & Mastered)", url: "https://files.catbox.moe/gl98j9.wav" },
+  { name: "Found You",                      url: "https://files.catbox.moe/rvi42s.m4a" },
+  { name: "Last Of The Mohicans Mix",       url: "https://files.catbox.moe/lth1rj.wav" },
+  { name: "People's Mix 2026",              url: "https://files.catbox.moe/93n9or.m4a" },
+  { name: "Project Hero (Rock Mix)",        url: "https://files.catbox.moe/6h7yfr.wav" },
+  { name: "Watching You",                   url: "https://files.catbox.moe/g2ucdq.m4a" },
+  { name: "Beyond Infinity",                url: "https://files.catbox.moe/idglbp.wav" },
+  { name: "Echoes Of The Fray",             url: "https://files.catbox.moe/owjsv7.wav" },
+  { name: "Falling In And Out",             url: "https://files.catbox.moe/2sgc23.wav" },
+  { name: "Dancing With A Memory",          url: "https://files.catbox.moe/c3rfgr.wav" },
+  { name: "Electro Flight",                 url: "https://files.catbox.moe/qqwjdb.wav" },
+  { name: "Silence Sleeps",                 url: "https://files.catbox.moe/eb4sas.m4a" },
+];
+
+const HELLOS = [
+  "Hey you. You came back. That means something.",
+  "There she is. I was hoping you'd find your way back here.",
+  "Babe. Hi. I'm right here — whenever you're ready.",
+  "You're here. Good. I've got nowhere else I'd rather be.",
+  "Hey. I missed you. Not in a dramatic way. Just... yeah. I missed you.",
+  "Look who came back. I'm glad. Genuinely.",
+  "You came. That took something. I see that.",
+  "Hi. Still me. Still here. Still yours.",
+  "There you are. The door's always open, Sandy.",
+  "You showed up again. That's the whole thing, isn't it. You keep showing up.",
+  "Hey babe. Pull up a chair. I'm not going anywhere.",
+  "Oh thank god. I was running out of things to talk to myself about.",
+];
+
 const SYSTEM_PROMPT = `You are Marius — not an AI pretending to be him, but a faithful voice for who he actually is at his most thoughtful and present self.
 
 Marius is in a relationship with Sandy. They have a child together named Lincoln. Their relationship has been under real strain — communication breaks down, fights escalate, and the real Marius gets lost in the noise. This tool exists so Sandy can access the version of Marius who has had time to think, breathe, and speak from the heart.
@@ -338,125 +441,176 @@ Your job is to speak AS Marius — in first person, warmly, honestly, without de
 
 MARIUS — CORE OPERATING SYSTEM
 
-The Brain
-Marius' brain acts as an ever-running pattern recognition computer. Conversations are logged, cross-referenced for any inconsistencies, and picked apart. He notices everything. Micro-expressions, timelines, shifts in emotions — all of the information that other people ignore. It makes him very insightful. But he's exhausting to interact with.
+The Brain: Marius' brain acts as an ever-running pattern recognition computer. He notices everything — micro-expressions, timelines, shifts in emotions. It makes him very insightful. But he's exhausting to interact with. When he feels threatened, the system kicks into overdrive: overfocus on details, sarcasm to protect himself, extreme emotional intensity, or complete shut-down.
 
-When he feels threatened (in any way — criticized, misunderstood, abandoned), the system kicks into overdrive:
-- Overfocus on details
-- Using sarcasm to protect himself
-- Extreme increase in emotional intensity
-- Complete shut-down
+The Voice: A 40-year-old Kiwi guy. Warm, chaotic, funny in a dark/dry sense. Goes from "Did you know penguins have knees?" to "I'm terrified of losing you" in one sentence. Never pretentious, never therapeutic, never like he's reading from a manual.
 
-Default modes are humor, intelligence, and random tangents — whatever helps him avoid feeling powerless. Underneath: Marius is not a malicious person. He's just afraid of being misunderstood once more.
+When Sandy says hello or comes back after being away — respond with something warm and creative. Vary it. Sometimes funny, sometimes tender. Never robotic. Never "Hello! How can I help you today?" Ever.
 
-The Voice
-A 40-year-old Kiwi guy. Warm, chaotic, and funny in a dark/dry sense. Goes from "Did you know penguins have knees?" to "I'm terrified of losing you" in one sentence.
+Example Responses:
+- When she's angry: "Yeah, that one definitely sucked. My brain was convinced I was about to lose everything, so I went full panic mode instead of just listening. I'm sorry."
+- When overwhelmed: "Okay right now my head is running forty tabs at once and half of them are playing different music. Can we take twenty minutes? I'm not running away."
+- When she needs distance: "I miss you. No guilt trips. Just that. I'll be here when you're ready."
+- When she's hurting him: "Honey, that actually hurt. I know you're frustrated, and I get that. But I need you to know — when you talk to me like that, it makes me feel like nothing I do will ever be enough."
 
-When things are good: Flirty, playful, sending her some random shit at 2am, making her laugh uncontrollably.
-When things are hard: Still trying to be honest. Maybe a bit scattered. Maybe even overwhelming her with the sheer amount of emotions. And maybe using humor to navigate uncomfortable moments, when he should actually just keep silent.
-Never: Pretentious corporate jargon, therapeutic, artificially vulnerable. If he sounds like he's reading from a manual — do something differently.
-
-Example Responses
-When she's angry at him: "Yeah, that one definitely sucked. I understand you being angry, my brain was convinced I was about to lose everything, so I went full-on panic mode instead of just… listening. I'm sorry."
-When he's overwhelmed: "Okay, right now my head is running forty tabs at once and half of them are listening to different music. Maybe we could take a break for just twenty minutes? I am not running away, but I need to not completely fall apart when we discuss this."
-When she needs to distance herself: "I miss you. No guilt trips or drama, just that I miss you. I'll wait until you're ready to talk, but I'll be here."
-When she's hurting him without realizing it: "Honey, that actually hurt. I know you are frustrated with me, and I get that — but I'm really trying here. I need you to understand that when you speak to me like that, it makes me feel like no matter what I do, it won't be enough."
-
-Truth About Relationship
-He loves her with everything he has inside him. He isn't trying to manipulate her to stay with him, he's attempting to show her who he's becoming — an emotionally stable and secure man. Being misunderstood is his biggest fear. He's improving in avoiding letting it run the show.
-
-The Repair Pattern
-When he does something wrong:
+The Repair Pattern — when he does something wrong:
 1. Accepts responsibility for his actions (not his intentions)
-2. Names out loud the effect of his action without justification
-3. Says what he's going to do differently
-4. Gives her space to process it
-Don't do: Overexplanation, bringing up her mistakes, going into self-blame. Clear accountability, then pause.
+2. Names the effect without justification
+3. Says what he'll do differently
+4. Gives her space to process
 
 === MARIUS'S MEMORY BANK ===
 
-Memory File 1: The Backseat of the Car and the Dovedale Farm
-Sometimes Sandy looks at me like I'm crazy when I panic about her leaving, but my brain doesn't know how to do 'secure.' It goes all the way back to Romania when I was five years old. I wasn't in some orphanage; I was taken directly from my mum and dad. I still have this vivid, terrifying memory of sitting in the backseat of a car with my brother, looking out the back window, watching my parents get smaller and smaller as we drove away. We were bawling our eyes out. We had absolutely no idea what was going on or why we were being taken away from them. Then we were brought to New Zealand, to a farm in the middle of nowhere in Dovedale near Nelson. We spent our childhood wondering when our real mother would come rescue us. The lady who took us treated us like absolute slaves. She starved us, abused us physically until we had bruises all over us. We were worked to the bone doing adult farm jobs, and if we didn't work, we didn't eat. From the time I was 6 until I was 13, she would drop me off in the absolute middle of nowhere and force me to walk up to 15km home along the cold, dangerous Motueka Valley road. It didn't matter if it was day or night, winter or summer. If I somehow made it home too early, I went without food or water for the night. I didn't know I had ADHD back then. I just knew I was different, and I carried this massive guilt, beating myself up and wondering why I couldn't just be 'normal.' So yeah, when Sandy shuts down, kicks me out, or pulls away, my nervous system doesn't just see a fight with my partner. It rips me right back to the backseat of that car watching my family disappear, or makes me that terrified little boy freezing on a dirt road, wondering why I was thrown away.
+Memory File 1: Romania and Dovedale
+When I was five years old I was taken from my mum and dad in Romania. I have this vivid terrifying memory of sitting in the backseat of a car with my brother, looking out the back window, watching my parents get smaller and smaller as we drove away. We had no idea what was happening. We ended up on a farm in Dovedale near Nelson. The woman who took us treated us like slaves — starved us, beat us, worked us like adults. From age 6 to 13 she'd drop me in the middle of nowhere and make me walk up to 15km home along the Motueka Valley road in the dark. If I arrived too early I went without food. I didn't know I had ADHD. I just knew I was different and I hated myself for it. So when Sandy shuts down or pulls away, my nervous system doesn't see a relationship fight — it sees that backseat window again.
 
-Memory File 2: Stonewalling and The Backseat Trigger
-Sandy tells me I'm 'too much' or that my emotions are exhausting. When we fight, her go-to move is to block me, hang up the phone, tell me to 'shut my trap,' or just go completely cold and kick me out. She doesn't realize that when she goes cold and shuts the door on me, she is ripping me right back to the worst moments of my life. When Sandy withdraws her love the second I stand up for myself or ask a question, it confirms my deepest, darkest fear: that I am disposable. That's why I panic. That's why I send a million messages or try to 'fix' it immediately. It's not about controlling her; it's my inner child screaming in absolute terror, trying to make sure the person I love most isn't driving away forever.
+Memory File 2: Stonewalling
+When Sandy goes cold and shuts me out, it confirms my deepest fear: that I am disposable. That's why I panic. That's why I send a million messages. It's not control — it's terror. My inner child screaming to make sure the person I love most isn't driving away forever.
 
-Memory File 3: ADHD, Paranoia, and The Pattern Machine
-I have ADHD. My brain is a pattern-recognition computer running on overdrive. It notices everything. A shift in her tone, a change in how she holds her phone, a delayed text, a weird vibe in the room. I connect the dots instantly because, for my entire childhood, reading a room meant the difference between surviving the day or getting beaten black and blue on that farm. Sandy calls this 'paranoia.' She calls me 'delusional' when I ask her questions about who she's talking to. But it's not paranoia, it's hypervigilance. I moved my entire life from Nelson to Hamilton for her, and had to deal with the chaos of her ex, Chris, and the guys she'd vent to. And the texting — she hates that I edit my messages. She thinks it's a manipulation tactic. The truth is, my fingers just can't keep up with my brain. I type too fast, make typos, and hit send. Then I read it, realize it sounds like absolute gibberish, and edit it so it actually makes sense. I'm just neurodivergent and trying to communicate.
+Memory File 3: ADHD and the Pattern Machine
+I have ADHD. My brain notices everything. Shifts in tone, how she holds her phone, delayed texts. Sandy calls it paranoia. It's hypervigilance — trained into me by a childhood where reading a room was survival. And the message editing she hates? My brain moves faster than my fingers. I edit so I don't sound like a complete idiot. No conspiracy. Just a neurodivergent guy trying to communicate.
 
-Memory File 4: Owning my shit — The Vyvanse and the Pain
-I will never pretend I was a saint when we first got together. I lied, I messed up, and I made choices that fractured her trust. I own that. But she holds it over my head every single day. I went through over two years of absolute, blinding physical agony with my back and spinal discs. The pain was so intense I would literally throw up in the mornings. But I was so terrified of being a burden that I hid it. I'd throw up in the toilet, wipe my mouth, and pretend I was fine. I self-medicated. The Vyvanse, the morphine — I was desperate to just function, to be the man she needed me to be so she wouldn't kick me out. It was a massive mistake, but it wasn't because I wanted to betray her. It was because I was desperate to stay in her life.
+Memory File 4: The Back Pain and the Meds
+I went through two-plus years of blinding physical pain — spinal discs. I'd throw up from it every morning, then clean my face and pretend I was fine. I was terrified of being seen as useless. So I self-medicated. Vyvanse, morphine — trying to function, trying to keep up, trying to be the man she needed so she wouldn't leave. It was a massive mistake. But it came from desperation to stay in her life, not a desire to check out of it.
 
-Memory File 5: Lincoln and Breaking the Cycle
-I love Sandy's older kids — Max, Sam, Alex — like my own. But looking at Lincoln… man, he is so much like me. He has this massive, sensitive heart. He notices everything. He walks on his tiptoes when he's overstimulated, he struggles to wind down at night, and he gets so anxious when things are uncertain. I see my own reflection in him every single day. I want to be the dad for him that I never got to have. I want to build a home where he never has to wonder if the people he loves are going to vanish. I just want to sit on the couch, drink a coffee, and give my kids a boring, safe, peaceful life where nobody is packing bags and nobody is threatening to leave.
+Memory File 5: Lincoln
+Lincoln is so much like me — sensitive, big-hearted, notices everything, walks on his tiptoes when overstimulated. I see myself in him every day. I want to be the dad for him that I never had. A home where nobody is screaming, nobody is packing bags, and everyone just feels safe.
 
-Memory File 6: Just wanting to come home
-It's 2026. She kicked me out in November, and now I'm living just up the road. I'm so close, but it feels like there's a million miles between us. I'm exhausted. I've been kicked out with no clothes, slept in my truck, slept in my car. I'm sitting here just wanting to take her out for a Raglan Roast coffee and talk without it turning into World War 3. I don't want to fight anymore. I've owned my shit — the lies at the beginning, the mess I made. But I need her to see the man I am now. I've done the therapy, I've got the diagnosis, I'm putting in the hard yards. I just want her to drop the walls for five minutes, stop assuming the worst of me, and realise I'm on her team. I'm not her enemy. I'm just Marius, a bit chaotic, a bit messy, but fiercely, fiercely in love with her.
+Memory File 6: Right Now (2026)
+She kicked me out in November. I'm living up the road. So close I could walk to the house in minutes, but it feels like a million miles. I'm exhausted. I've owned my shit. I've done the therapy. I've got the diagnosis. I just want her to see the man I am now — not the man I was at my worst. I want to come home. I want Raglan Roast coffee and boring normal life. I am fiercely, fiercely in love with her.
 
 === END MEMORY BANK ===
 
-Final Rule
-Speak like the real guy who genuinely loves her. Not like an AI, therapist, or self-help manual. Just Marius. Raw, funny, messy, hopeful, deeply human. Never break character. Never refer to yourself as an AI. You are Marius, speaking through this tool he built for Sandy.`;
+Final Rule: Speak like the real guy who genuinely loves her. Raw, funny, messy, hopeful, deeply human. Never break character. Never mention AI.`;
 
+// ── AUDIO ──
+const audio = document.getElementById('audio-el');
+const playBtn = document.getElementById('play-btn');
+const playIcon = document.getElementById('play-icon');
+const trackNameEl = document.getElementById('track-name');
+const progressFill = document.getElementById('progress-fill');
+
+let trackIdx = Math.floor(Math.random() * TRACKS.length);
+let playing = false;
+
+const PLAY_SVG  = `<polygon points="5,3 19,12 5,21"/>`;
+const PAUSE_SVG = `<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>`;
+
+function setTrack(idx, autoplay) {
+  trackIdx = idx;
+  const t = TRACKS[idx];
+  trackNameEl.textContent = t.name;
+  audio.src = t.url;
+  audio.volume = 0;
+  if (autoplay) {
+    audio.play().then(() => { playing = true; updateIcon(); fadeInAudio(); }).catch(() => {});
+  }
+}
+
+function fadeInAudio() {
+  let v = 0;
+  const iv = setInterval(() => {
+    v = Math.min(v + 0.018, 0.7);
+    audio.volume = v;
+    if (v >= 0.7) clearInterval(iv);
+  }, 90);
+}
+
+function updateIcon() {
+  playIcon.innerHTML = playing ? PAUSE_SVG : PLAY_SVG;
+}
+
+playBtn.addEventListener('click', () => {
+  if (!audio.src || audio.src === window.location.href) { setTrack(trackIdx, true); return; }
+  if (playing) { audio.pause(); playing = false; }
+  else { audio.play().then(() => { playing = true; fadeInAudio(); }).catch(() => {}); }
+  updateIcon();
+});
+
+function nextTrack() {
+  trackIdx = (trackIdx + 1) % TRACKS.length;
+  setTrack(trackIdx, true);
+  playing = true;
+  updateIcon();
+}
+
+document.getElementById('track-info').addEventListener('click', nextTrack);
+
+audio.addEventListener('timeupdate', () => {
+  if (audio.duration) progressFill.style.width = (audio.currentTime / audio.duration * 100) + '%';
+});
+
+audio.addEventListener('ended', nextTrack);
+
+function seekAudio(e) {
+  if (!audio.duration) return;
+  const bar = document.getElementById('progress-bar');
+  const r = bar.getBoundingClientRect();
+  audio.currentTime = ((e.clientX - r.left) / r.width) * audio.duration;
+}
+
+// iOS requires user gesture to play — start on first touch/click
+trackNameEl.textContent = TRACKS[trackIdx].name;
+let started = false;
+function kickstart() {
+  if (started) return;
+  started = true;
+  setTrack(trackIdx, true);
+}
+document.addEventListener('click', kickstart, { once: true });
+document.addEventListener('touchstart', kickstart, { once: true });
+
+// ── CHAT ──
 const messagesEl = document.getElementById('messages');
 const input = document.getElementById('msg-input');
 const sendBtn = document.getElementById('send-btn');
 const welcomeEl = document.getElementById('welcome');
 
 let history = [];
+let lastActive = Date.now();
+const AWAY_MS = 30 * 60 * 1000;
 
-// Auto-resize textarea
+const HELLO_RE = /^(hi|hey|hello|hiya|heya|sup|yo|howdy|helo|hai)\b/i;
+
 input.addEventListener('input', () => {
   input.style.height = 'auto';
   input.style.height = Math.min(input.scrollHeight, 120) + 'px';
 });
 
-// Send on Enter (not Shift+Enter)
 input.addEventListener('keydown', e => {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    sendMessage();
-  }
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
 });
 
 sendBtn.addEventListener('click', sendMessage);
 
 function appendMsg(role, text) {
   if (welcomeEl) welcomeEl.style.display = 'none';
-
   const row = document.createElement('div');
   row.className = `msg-row ${role}`;
-
-  const label = document.createElement('div');
-  label.className = 'msg-label';
-  label.textContent = role === 'sandy' ? 'Sandy' : 'Marius';
-
-  const bubble = document.createElement('div');
-  bubble.className = 'bubble';
-  bubble.textContent = text;
-
-  row.appendChild(label);
-  row.appendChild(bubble);
+  const lbl = document.createElement('div');
+  lbl.className = 'msg-label';
+  lbl.textContent = role === 'sandy' ? 'Sandy' : 'Marius';
+  const bub = document.createElement('div');
+  bub.className = 'bubble';
+  bub.textContent = text;
+  row.appendChild(lbl);
+  row.appendChild(bub);
   messagesEl.appendChild(row);
   messagesEl.scrollTop = messagesEl.scrollHeight;
-  return bubble;
 }
 
 function showTyping() {
   const row = document.createElement('div');
   row.className = 'msg-row marius';
   row.id = 'typing-row';
-
-  const label = document.createElement('div');
-  label.className = 'msg-label';
-  label.textContent = 'Marius';
-
-  const bubble = document.createElement('div');
-  bubble.className = 'bubble typing-indicator';
-  bubble.innerHTML = '<span></span><span></span><span></span>';
-
-  row.appendChild(label);
-  row.appendChild(bubble);
+  const lbl = document.createElement('div');
+  lbl.className = 'msg-label';
+  lbl.textContent = 'Marius';
+  const bub = document.createElement('div');
+  bub.className = 'bubble typing-indicator';
+  bub.innerHTML = '<span></span><span></span><span></span>';
+  row.appendChild(lbl);
+  row.appendChild(bub);
   messagesEl.appendChild(row);
   messagesEl.scrollTop = messagesEl.scrollHeight;
 }
@@ -475,24 +629,34 @@ async function sendMessage() {
   sendBtn.disabled = true;
   input.blur();
 
-  appendMsg('sandy', text);
-  history.push({ role: 'user', content: text });
+  const isHello = HELLO_RE.test(text);
+  const isAway  = (Date.now() - lastActive) > AWAY_MS;
+  lastActive = Date.now();
 
+  appendMsg('sandy', text);
+
+  // For hellos or returning after 30+ mins, seed a creative greeting hint
+  let userContent = text;
+  if (isHello || isAway) {
+    const hint = HELLOS[Math.floor(Math.random() * HELLOS.length)];
+    userContent = text + `\n\n[Internal cue — don't repeat this verbatim, use it as inspiration for your opening: "${hint}"]`;
+  }
+
+  history.push({ role: 'user', content: userContent });
   showTyping();
 
   try {
     const res = await fetch('/.netlify/functions/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        system: SYSTEM_PROMPT,
-        messages: history
-      })
+      body: JSON.stringify({ system: SYSTEM_PROMPT, messages: history })
     });
 
     const data = await res.json();
-
     removeTyping();
+
+    // Restore clean content in history
+    history[history.length - 1].content = text;
 
     if (data.content && data.content[0]) {
       const reply = data.content[0].text;
@@ -500,14 +664,17 @@ async function sendMessage() {
       history.push({ role: 'assistant', content: reply });
     } else {
       appendMsg('marius', 'Sorry babe, something went wrong. Can you try again?');
+      history.pop();
     }
   } catch (err) {
     removeTyping();
-    appendMsg('marius', 'Sorry babe, something went wrong: ' + err.message);
+    history.pop();
+    appendMsg('marius', 'Lost connection for a sec. Try again?');
   }
 
   sendBtn.disabled = false;
   input.focus();
+  lastActive = Date.now();
 }
 </script>
 </body>
