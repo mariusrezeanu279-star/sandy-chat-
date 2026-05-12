@@ -1,8 +1,7 @@
 export default {
   async fetch(request, env) {
     // Only handle POST requests for chat
-    if (request.method !== 'POST') {
-      return new Response('Not found', { status: 404 });
+    if (request.method !== 'POST') return new Response('Not found', { status: 404 });
     }
 
     try {
