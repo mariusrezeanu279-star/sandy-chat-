@@ -646,7 +646,7 @@ async function sendMessage() {
   showTyping();
 
   try {
-    const res = await fetch('/chat', {
+    const res = await fetch('https://sandy-chat.mariusrezeanu279.workers.dev/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ system: SYSTEM_PROMPT, messages: history })
