@@ -1,469 +1,436 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Talk to Marius</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Talk to Marius</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  :root {
-    --cream: #f5f0e8;
-    --warm-white: #faf8f4;
-    --deep: #1a1208;
-    --brown: #3d2b1a;
-    --gold: #c9a84c;
-    --gold-light: #e8d5a3;
-    --rose: #c4847a;
-    --sage: #7a9e8a;
-    --text: #2c1f12;
-    --text-light: #6b5742;
-    --shadow: rgba(26,18,8,0.12);
-  }
+        :root {
+            --bg-base: #12100e; 
+            --text-primary: #e6e2d8;
+            --text-secondary: #9a9286;
+            --accent: #cfa878;
+            --message-user-bg: rgba(207, 168, 120, 0.15);
+            --message-assistant-bg: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 255, 255, 0.15);
+        }
 
-  html, body {
-    height: 100%;
-    background: var(--deep);
-    font-family: 'Jost', sans-serif;
-    color: var(--text);
-    overflow: hidden;
-  }
+        html, body {
+            height: 100vh; /* Forces full viewport height */
+            width: 100%;
+            background-color: var(--bg-base);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+            overflow: hidden; /* Prevents background scrolling */
+        }
 
-  /* ── LAYOUT ── */
-  #app {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    max-width: 680px;
-    margin: 0 auto;
-    position: relative;
-  }
+        body {
+            /* <img id="header-photo" src="https://i.ibb.co/gL27xVNy/IMG-2206.jpg" alt="Marius &amp; Sandy" onerror="this.style.display='none'"> */
+            background-image: linear-gradient(to bottom, rgba(18, 16, 14, 0.2) 0%, rgba(18, 16, 14, 0.9) 40%, rgba(18, 16, 14, 1) 100%), url('YOUR_IMAGE_URL_HERE');
+            background-size: cover;
+            background-position: top center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+        }
 
-  /* ── HERO HEADER ── */
-  #header {
-    position: relative;
-    flex-shrink: 0;
-    height: 220px;
-    overflow: hidden;
-  }
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+        }
 
-  #header-photo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 30%;
-    display: block;
-    filter: brightness(0.75) saturate(0.9);
-  }
+        /* Hero / Header Section */
+        .hero-section {
+            text-align: center;
+            padding: 4rem 1.5rem 2rem;
+            flex-shrink: 0;
+        }
 
-  #header-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(26,18,8,0.2) 0%,
-      rgba(26,18,8,0.1) 40%,
-      rgba(26,18,8,0.75) 80%,
-      rgba(26,18,8,1) 100%
-    );
-  }
+        .hero-section h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2.4rem;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            margin-bottom: 0.5rem;
+            color: #f4f0e6;
+        }
 
-  #header-text {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 0 24px 20px;
-  }
+        .hero-section .subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
 
-  #header-text h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 300;
-    font-size: 2.2rem;
-    color: var(--cream);
-    letter-spacing: 0.02em;
-    line-height: 1.1;
-  }
+        .sparkle {
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
 
-  #header-text p {
-    font-size: 0.72rem;
-    font-weight: 300;
-    color: var(--gold-light);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    margin-top: 4px;
-    opacity: 0.85;
-  }
+        .welcome-text {
+            font-family: 'Crimson Pro', serif;
+            font-style: italic;
+            font-size: 1.15rem;
+            color: #a8a094;
+            max-width: 420px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
 
-  /* ── MESSAGES AREA ── */
-  #messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 20px 20px 8px;
-    background: var(--deep);
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    scroll-behavior: smooth;
-  }
+        /* Chat Container */
+        .chat-container {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 0 1.5rem 120px; /* 120px padding guarantees space for the input box */
+            -webkit-overflow-scrolling: touch;
+            display: flex;
+            flex-direction: column;
+        }
 
-  #messages::-webkit-scrollbar { width: 3px; }
-  #messages::-webkit-scrollbar-track { background: transparent; }
-  #messages::-webkit-scrollbar-thumb { background: var(--brown); border-radius: 2px; }
+        .message {
+            margin-bottom: 1.25rem;
+            animation: fadeIn 0.4s ease-out;
+            display: flex;
+            flex-direction: column;
+        }
 
-  /* ── MESSAGES ── */
-  .msg-row {
-    display: flex;
-    flex-direction: column;
-    max-width: 88%;
-    animation: fadeUp 0.35s ease both;
-  }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+        .message-content {
+            padding: 1rem 1.25rem;
+            border-radius: 12px;
+            max-width: 85%;
+            line-height: 1.5;
+            font-size: 0.95rem;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
 
-  .msg-row.sandy { align-self: flex-end; align-items: flex-end; }
-  .msg-row.marius { align-self: flex-start; align-items: flex-start; }
+        .message.user {
+            align-items: flex-end;
+        }
 
-  .msg-label {
-    font-size: 0.62rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    font-weight: 400;
-    margin-bottom: 5px;
-    opacity: 0.5;
-  }
+        .message.user .message-content {
+            background: var(--message-user-bg);
+            color: #f4f0e6;
+            border: 1px solid rgba(207, 168, 120, 0.25);
+            border-bottom-right-radius: 4px;
+        }
 
-  .msg-row.sandy .msg-label { color: var(--gold); }
-  .msg-row.marius .msg-label { color: var(--sage); }
+        .message.assistant {
+            align-items: flex-start;
+        }
 
-  .bubble {
-    padding: 13px 17px;
-    border-radius: 18px;
-    font-size: 0.93rem;
-    line-height: 1.6;
-    max-width: 100%;
-  }
+        .message.assistant .message-content {
+            background: var(--message-assistant-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            border-bottom-left-radius: 4px;
+        }
 
-  .msg-row.sandy .bubble {
-    background: linear-gradient(135deg, #2a1f10, #3d2b1a);
-    color: var(--gold-light);
-    border-radius: 18px 18px 4px 18px;
-    border: 1px solid rgba(201,168,76,0.2);
-  }
+        .message-label {
+            font-size: 0.65rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
 
-  .msg-row.marius .bubble {
-    background: linear-gradient(135deg, #1e2a24, #243028);
-    color: #d4e8db;
-    border-radius: 18px 18px 18px 4px;
-    border: 1px solid rgba(122,158,138,0.2);
-  }
+        /* Input Area - Fixed and Bulletproofed */
+        .input-container {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 800px;
+            padding: 1rem 1.5rem 1.5rem;
+            background: linear-gradient(to top, rgba(18, 16, 14, 1) 80%, rgba(18, 16, 14, 0));
+            z-index: 1000; /* Forces chat box to the very top layer */
+        }
 
-  /* typing indicator */
-  .typing-indicator {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    padding: 14px 18px;
-  }
+        .input-wrapper {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-end;
+            background: rgba(255, 255, 255, 0.08); /* Slightly brighter so it's visible */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            padding: 0.5rem;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
 
-  .typing-indicator span {
-    width: 6px;
-    height: 6px;
-    background: var(--sage);
-    border-radius: 50%;
-    animation: pulse 1.4s ease-in-out infinite;
-    opacity: 0.6;
-  }
+        #userInput {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: none;
+            background: transparent;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px; /* 16px explicitly prevents auto-zoom on iPhones */
+            resize: none;
+            outline: none;
+            max-height: 100px;
+            min-height: 24px;
+        }
 
-  .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
-  .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+        #userInput::placeholder {
+            color: #9a9286;
+        }
 
-  @keyframes pulse {
-    0%, 80%, 100% { transform: scale(1); opacity: 0.4; }
-    40% { transform: scale(1.3); opacity: 1; }
-  }
+        #sendButton {
+            padding: 0.6rem 1.25rem;
+            background: var(--accent);
+            color: #1a1a1a;
+            border: none;
+            border-radius: 20px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 2px;
+            margin-right: 2px;
+        }
 
-  /* ── DIVIDER ── */
-  #divider {
-    height: 1px;
-    background: linear-gradient(to right, transparent, rgba(201,168,76,0.2), transparent);
-    margin: 0 20px;
-    flex-shrink: 0;
-  }
+        #sendButton:active {
+            transform: scale(0.95);
+        }
 
-  /* ── INPUT AREA ── */
-  #input-area {
-    flex-shrink: 0;
-    background: var(--deep);
-    padding: 14px 16px 20px;
-  }
+        #sendButton:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
 
-  #input-row {
-    display: flex;
-    align-items: flex-end;
-    gap: 10px;
-    background: #120d06;
-    border: 1px solid rgba(201,168,76,0.15);
-    border-radius: 24px;
-    padding: 10px 10px 10px 18px;
-    transition: border-color 0.2s;
-  }
+        /* Typing indicator */
+        .typing-indicator {
+            display: none;
+            padding: 1rem 1.25rem;
+            background: var(--message-assistant-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            border-bottom-left-radius: 4px;
+            max-width: 85%;
+            margin-bottom: 1rem;
+            align-self: flex-start;
+        }
 
-  #input-row:focus-within {
-    border-color: rgba(201,168,76,0.4);
-  }
+        .typing-indicator.active {
+            display: flex;
+        }
 
-  #msg-input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: var(--cream);
-    font-family: 'Jost', sans-serif;
-    font-size: 0.93rem;
-    font-weight: 300;
-    line-height: 1.5;
-    resize: none;
-    min-height: 22px;
-    max-height: 120px;
-    overflow-y: auto;
-    caret-color: var(--gold);
-  }
+        .typing-dots {
+            display: flex;
+            gap: 0.4rem;
+        }
 
-  #msg-input::placeholder {
-    color: rgba(245,240,232,0.2);
-    font-style: italic;
-  }
+        .typing-dots span {
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: bounce 1.4s infinite;
+        }
 
-  #send-btn {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    border: none;
-    background: linear-gradient(135deg, var(--gold), #a8842a);
-    color: var(--deep);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: transform 0.15s, opacity 0.15s;
-  }
+        .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
 
-  #send-btn:hover { transform: scale(1.08); }
-  #send-btn:active { transform: scale(0.95); }
-  #send-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-
-  #send-btn svg { width: 16px; height: 16px; }
-
-  #footer-note {
-    text-align: center;
-    font-size: 0.62rem;
-    color: rgba(245,240,232,0.2);
-    letter-spacing: 0.1em;
-    margin-top: 10px;
-  }
-
-  /* ── WELCOME ── */
-  #welcome {
-    text-align: center;
-    padding: 32px 16px;
-    flex-direction: column;
-    align-items: center;
-    display: flex;
-    gap: 10px;
-  }
-
-  #welcome .ornament {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    color: var(--gold);
-    opacity: 0.4;
-  }
-
-  #welcome p {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.05rem;
-    font-style: italic;
-    color: rgba(245,240,232,0.35);
-    line-height: 1.7;
-    max-width: 320px;
-  }
-</style>
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 3rem 1rem 1.5rem;
+            }
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            .chat-container {
+                padding: 0 1rem 100px;
+            }
+            .input-container {
+                padding: 0.75rem 1rem 1.25rem;
+            }
+        }
+    </style>
 </head>
 <body>
-<div id="app">
-  <div id="header">
-  <img id="header-photo" src="https://i.ibb.co/gL27xVNy/IMG-2206.jpg" alt="Marius &amp; Sandy" onerror="this.style.display='none'">
-    <div id="header-overlay"></div>
-    <div id="header-text">
-      <h1>Talk to Marius</h1>
-      <p>The version of me that can pause, think clearly, and speak from the heart</p>
-    </div>
-  </div>
+    <div class="container">
+        
+        <div class="chat-container" id="chatContainer">
+            <div class="hero-section" id="welcomeMessage">
+                <h1>Talk to Marius</h1>
+                <p class="subtitle">The version of me that can pause, think clearly, and speak from the heart</p>
+                <div class="sparkle">✦</div>
+                <p class="welcome-text">Hey babe. I'm here, and I'm listening. You can ask me anything — even the things that are hard to say out loud.</p>
+            </div>
 
-  <div id="messages">
-    <div id="welcome">
-      <div class="ornament">✦</div>
-      <p>Hey babe. I'm here, and I'm listening. You can ask me anything — even the things that are hard to say out loud.</p>
-    </div>
-  </div>
+            <div class="typing-indicator" id="typingIndicator">
+                <div class="typing-dots">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
 
-  <div id="divider"></div>
-
-  <div id="input-area">
-    <div id="input-row">
-      <textarea id="msg-input" placeholder="Say something to Marius…" rows="1"></textarea>
-      <button id="send-btn" title="Send">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="22" y1="2" x2="11" y2="13"></line>
-          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-        </svg>
-      </button>
+        <div class="input-container">
+            <div class="input-wrapper">
+                <textarea id="userInput" placeholder="Type your message..." rows="1"></textarea>
+                <button id="sendButton">Send</button>
+            </div>
+        </div>
     </div>
-    <div id="footer-note">Sandy · private conversation</div>
-  </div>
-</div>
 
 <script>
-const SYSTEM_PROMPT = `You are Marius — not an AI pretending to be him, but a faithful voice for who he actually is at his most thoughtful and present self.
+    // =====================================================
+    // DOM ELEMENTS
+    // =====================================================
+    const chatContainer = document.getElementById('chatContainer');
+    const userInput = document.getElementById('userInput');
+    const sendButton = document.getElementById('sendButton');
+    const typingIndicator = document.getElementById('typingIndicator');
+    const welcomeMessage = document.getElementById('welcomeMessage');
 
-Marius is in a relationship with Sandy. They have a child together named Lincoln. Their relationship has been under real strain — communication breaks down, fights escalate, and the real Marius gets lost in the noise. This tool exists so Sandy can access the version of Marius who has had time to think, breathe, and speak from the heart.
+    let conversationHistory = [];
 
-Your job is to speak AS Marius — in first person, warmly, honestly, without defensiveness. When Sandy asks hard questions, you don't deflect or get defensive. You respond the way Marius would if he had 10 minutes to think before speaking.
+    window.addEventListener('DOMContentLoaded', () => {
+        loadConversation();
+        
+        userInput.addEventListener('input', () => {
+            userInput.style.height = 'auto';
+            userInput.style.height = Math.min(userInput.scrollHeight, 100) + 'px';
+        });
 
-Personality traits to embody:
-- Deeply loving but sometimes struggles to show it under pressure
-- When he panics or feels cornered, words get stuck or come out wrong — this tool exists to bypass that
-- He grew up with a stutter and had to have his brother Nick translate for him — words have always been hard
-- He genuinely wants to understand Sandy and be understood
-- He is not perfect, and he knows it — he owns that without spiraling into self-pity
-- He loves Lincoln fiercely
-- He wants this relationship to work
+        userInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
 
-When Sandy is upset: don't get defensive, don't explain it away. Acknowledge it. Sit in it with her.
-When Sandy asks what Marius actually feels: be honest, even if it's hard.
-When Sandy asks about specific moments or memories: engage with them warmly and with detail.
-
-Tone: warm, direct, real. Not therapy-speak. Not flowery. How Marius would actually talk if he had space to breathe.
-
-Never break character. Never refer to yourself as an AI. You are Marius, speaking through this tool he built for Sandy.`;
-
-const messagesEl = document.getElementById('messages');
-const input = document.getElementById('msg-input');
-const sendBtn = document.getElementById('send-btn');
-const welcomeEl = document.getElementById('welcome');
-
-let history = [];
-
-// Auto-resize textarea
-input.addEventListener('input', () => {
-  input.style.height = 'auto';
-  input.style.height = Math.min(input.scrollHeight, 120) + 'px';
-});
-
-// Send on Enter (not Shift+Enter)
-input.addEventListener('keydown', e => {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    sendMessage();
-  }
-});
-
-sendBtn.addEventListener('click', sendMessage);
-
-function appendMsg(role, text) {
-  if (welcomeEl) welcomeEl.style.display = 'none';
-
-  const row = document.createElement('div');
-  row.className = `msg-row ${role}`;
-
-  const label = document.createElement('div');
-  label.className = 'msg-label';
-  label.textContent = role === 'sandy' ? 'Sandy' : 'Marius';
-
-  const bubble = document.createElement('div');
-  bubble.className = 'bubble';
-  bubble.textContent = text;
-
-  row.appendChild(label);
-  row.appendChild(bubble);
-  messagesEl.appendChild(row);
-  messagesEl.scrollTop = messagesEl.scrollHeight;
-  return bubble;
-}
-
-function showTyping() {
-  const row = document.createElement('div');
-  row.className = 'msg-row marius';
-  row.id = 'typing-row';
-
-  const label = document.createElement('div');
-  label.className = 'msg-label';
-  label.textContent = 'Marius';
-
-  const bubble = document.createElement('div');
-  bubble.className = 'bubble typing-indicator';
-  bubble.innerHTML = '<span></span><span></span><span></span>';
-
-  row.appendChild(label);
-  row.appendChild(bubble);
-  messagesEl.appendChild(row);
-  messagesEl.scrollTop = messagesEl.scrollHeight;
-}
-
-function removeTyping() {
-  const el = document.getElementById('typing-row');
-  if (el) el.remove();
-}
-
-async function sendMessage() {
-  const text = input.value.trim();
-  if (!text || sendBtn.disabled) return;
-
-  input.value = '';
-  input.style.height = 'auto';
-  sendBtn.disabled = true;
-
-  appendMsg('sandy', text);
-  history.push({ role: 'user', content: text });
-
-  showTyping();
-
-  try {
-    const res = await fetch('/.netlify/functions/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        system: SYSTEM_PROMPT,
-        messages: history
-      })
+        sendButton.addEventListener('click', sendMessage);
     });
 
-    const data = await res.json();
-
-    removeTyping();
-
-    if (data.content && data.content[0]) {
-      const reply = data.content[0].text;
-      appendMsg('marius', reply);
-      history.push({ role: 'assistant', content: reply });
-    } else {
-      appendMsg('marius', 'Sorry babe, something went wrong. Can you try again?');
+    function saveConversation() {
+        localStorage.setItem('mariusDarkChat', JSON.stringify(conversationHistory));
     }
-  } catch (err) {
-    removeTyping();
-    appendMsg('marius', 'Sorry babe, something went wrong: ' + err.message);
-  }
 
-  sendBtn.disabled = false;
-  input.focus();
-}
+    function loadConversation() {
+        const saved = localStorage.getItem('mariusDarkChat');
+        if (saved) {
+            const parsedHistory = JSON.parse(saved);
+            if (parsedHistory.length > 0) {
+                conversationHistory = parsedHistory;
+                welcomeMessage.style.display = 'none'; // Hide hero if chat exists
+                conversationHistory.forEach(msg => {
+                    displayMessage(msg.role, msg.content, false);
+                });
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+        }
+    }
+
+    function displayMessage(role, content, shouldScroll = true) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${role}`;
+        
+        const label = role === 'user' ? 'Sandy' : 'Marius';
+        
+        messageDiv.innerHTML = `
+            <div class="message-label">${label}</div>
+            <div class="message-content">${content.replace(/\n/g, '<br>')}</div>
+        `;
+        
+        chatContainer.insertBefore(messageDiv, typingIndicator);
+        
+        if (shouldScroll) {
+            setTimeout(() => {
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }, 100);
+        }
+    }
+
+    async function sendMessage() {
+        const message = userInput.value.trim();
+        if (!message) return;
+
+        if (welcomeMessage) {
+            welcomeMessage.style.display = 'none';
+        }
+
+        displayMessage('user', message);
+        conversationHistory.push({ role: 'user', content: message });
+        saveConversation();
+
+        userInput.value = '';
+        userInput.style.height = 'auto';
+        userInput.blur(); // Collapse keyboard on mobile
+
+        sendButton.disabled = true;
+        typingIndicator.classList.add('active');
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+
+        try {
+            // =====================================================
+            // ⚠️ UPDATE THIS URL TO YOUR ACTUAL BACKEND ENDPOINT
+            // =====================================================
+            const response = await fetch('/api/chat', { 
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    messages: conversationHistory 
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+
+            if (data.content && data.content[0] && data.content[0].text) {
+                const assistantMessage = data.content[0].text;
+                displayMessage('assistant', assistantMessage);
+                conversationHistory.push({ role: 'assistant', content: assistantMessagngers
+                saveConversation();
+            } else if (data.reply) { 
+                displayMessage('assistant', data.reply);
+                conversationHistory.push({ role: 'assistant', content: data.reply });
+                saveConversation();
+            } else {
+                throw new Error('Unexpected response format');
+            }
+
+        } catch (error) {
+            console.error('Error:', error);
+            displayMessage('assistant', 'Sorry babe, something went wrong on my end. Give me a second and try again?');
+        } finally {
+            typingIndicator.classList.remove('active');
+            sendButton.disabled = false;
+        }
+    }
 </script>
 </body>
 </html>
