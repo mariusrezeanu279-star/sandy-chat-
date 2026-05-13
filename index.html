@@ -11,17 +11,17 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-–cream: #f5f0e8;
-–deep: #1a1208;
-–brown: #3d2b1a;
-–gold: #c9a84c;
-–gold-light: #e8d5a3;
-–sage: #7a9e8a;
+--cream: #f5f0e8;
+--deep: #1a1208;
+--brown: #3d2b1a;
+--gold: #c9a84c;
+--gold-light: #e8d5a3;
+--sage: #7a9e8a;
 }
 
 html, body {
 height: 100dvh;
-background: var(–deep);
+background: var(--deep);
 font-family: ‘Jost’, sans-serif;
 overflow: hidden;
 }
@@ -66,13 +66,13 @@ padding: 0 22px 16px;
 font-family: ‘Cormorant Garamond’, serif;
 font-weight: 300;
 font-size: 1.9rem;
-color: var(–cream);
+color: var(--cream);
 letter-spacing: 0.02em;
 }
 
 #header-text p {
 font-size: 0.66rem;
-color: var(–gold-light);
+color: var(--gold-light);
 letter-spacing: 0.16em;
 text-transform: uppercase;
 margin-top: 3px;
@@ -94,7 +94,7 @@ width: 32px; height: 32px;
 border-radius: 50%;
 border: 1px solid rgba(201,168,76,0.3);
 background: transparent;
-color: var(–gold);
+color: var(--gold);
 cursor: pointer;
 display: flex;
 align-items: center;
@@ -116,7 +116,7 @@ cursor: pointer;
 font-family: ‘Cormorant Garamond’, serif;
 font-size: 0.85rem;
 font-style: italic;
-color: var(–gold-light);
+color: var(--gold-light);
 white-space: nowrap;
 overflow: hidden;
 text-overflow: ellipsis;
@@ -141,7 +141,7 @@ flex-shrink: 0;
 
 #progress-fill {
 height: 100%;
-background: linear-gradient(to right, var(–gold), rgba(201,168,76,0.4));
+background: linear-gradient(to right, var(--gold), rgba(201,168,76,0.4));
 border-radius: 2px;
 width: 0%;
 transition: width 0.5s linear;
@@ -160,14 +160,14 @@ flex-shrink: 0;
 transition: color 0.2s;
 }
 
-#next-btn:hover { color: var(–gold); }
+#next-btn:hover { color: var(--gold); }
 #next-btn svg { width: 12px; height: 12px; }
 
 #messages {
 flex: 1;
 overflow-y: auto;
 padding: 16px 20px 8px;
-background: var(–deep);
+background: var(--deep);
 display: flex;
 flex-direction: column;
 gap: 14px;
@@ -176,7 +176,7 @@ scroll-behavior: smooth;
 
 #messages::-webkit-scrollbar { width: 3px; }
 #messages::-webkit-scrollbar-track { background: transparent; }
-#messages::-webkit-scrollbar-thumb { background: var(–brown); border-radius: 2px; }
+#messages::-webkit-scrollbar-thumb { background: var(--brown); border-radius: 2px; }
 
 .msg-row {
 display: flex;
@@ -201,8 +201,8 @@ margin-bottom: 4px;
 opacity: 0.42;
 }
 
-.msg-row.sandy .msg-label { color: var(–gold); }
-.msg-row.marius .msg-label { color: var(–sage); }
+.msg-row.sandy .msg-label { color: var(--gold); }
+.msg-row.marius .msg-label { color: var(--sage); }
 
 .bubble {
 padding: 12px 16px;
@@ -214,7 +214,7 @@ max-width: 100%;
 
 .msg-row.sandy .bubble {
 background: linear-gradient(135deg, #2a1f10, #3d2b1a);
-color: var(–gold-light);
+color: var(--gold-light);
 border-radius: 18px 18px 4px 18px;
 border: 1px solid rgba(201,168,76,0.18);
 }
@@ -235,7 +235,7 @@ padding: 14px 18px;
 
 .typing-indicator span {
 width: 6px; height: 6px;
-background: var(–sage);
+background: var(--sage);
 border-radius: 50%;
 animation: pulse 1.4s ease-in-out infinite;
 opacity: 0.6;
@@ -258,7 +258,7 @@ flex-shrink: 0;
 
 #input-area {
 flex-shrink: 0;
-background: var(–deep);
+background: var(--deep);
 padding: 12px 16px max(18px, env(safe-area-inset-bottom));
 }
 
@@ -280,7 +280,7 @@ flex: 1;
 background: transparent;
 border: none;
 outline: none;
-color: var(–cream);
+color: var(--cream);
 font-family: ‘Jost’, sans-serif;
 font-size: 16px;
 font-weight: 300;
@@ -289,7 +289,7 @@ resize: none;
 min-height: 22px;
 max-height: 120px;
 overflow-y: auto;
-caret-color: var(–gold);
+caret-color: var(--gold);
 }
 
 #msg-input::placeholder { color: rgba(245,240,232,0.18); font-style: italic; }
@@ -298,8 +298,8 @@ caret-color: var(–gold);
 width: 38px; height: 38px;
 border-radius: 50%;
 border: none;
-background: linear-gradient(135deg, var(–gold), #a8842a);
-color: var(–deep);
+background: linear-gradient(135deg, var(--gold), #a8842a);
+color: var(--deep);
 cursor: pointer;
 display: flex;
 align-items: center;
@@ -333,7 +333,7 @@ gap: 10px;
 #welcome .ornament {
 font-family: ‘Cormorant Garamond’, serif;
 font-size: 1.7rem;
-color: var(–gold);
+color: var(--gold);
 opacity: 0.38;
 }
 
